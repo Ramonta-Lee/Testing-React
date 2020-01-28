@@ -25,13 +25,11 @@ mockGetData.mockResolvedValue({
 });
 
 test("logo renders", () => {
- const { getByAltText } = render(<App />);
- getByAltText(/logo/i);
+  const { getByAltText } = render(<App />);
+  getByAltText(/logo/i);
 });
 
 test("initial render of character names, previous, and next button", async () => {
-  
-
   const { getByText } = render(<StarWarsCharacters />);
 
   // Testing async of the fired events of the previous and next button
@@ -39,8 +37,6 @@ test("initial render of character names, previous, and next button", async () =>
 
   fireEvent.click(getByText("Previous"));
   fireEvent.click(getByText("Next"));
-
-  // expect(mockGetData).toHaveBeenCalledTimes(1);
 
   await wait(() => expect(getByText(/Initial Name/i)));
 
