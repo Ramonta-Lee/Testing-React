@@ -4,8 +4,12 @@ import Loader from "react-loader-spinner";
 import { getData } from "../api";
 import "./star-wars-characters.css";
 
+import { useSelector, useDispatch } from "react-redux";
+
 export default function StarWarsCharacters() {
-  const [url, setUrl] = useState("https://swapi.co/api/people");
+  const url = useSelector(state => state.url);
+  const dispatch = useDispatch();
+
   const [previous, setPrevious] = useState();
   const [next, setNext] = useState();
   const [isLoading, setIsLoading] = useState(false);
@@ -14,7 +18,8 @@ export default function StarWarsCharacters() {
     setIsLoading(true);
     const getCharacters = async () => {
       const characters = await getData(url);
-      console.log(characters);
+      // AFTER this is RESOLVED, the rest of the code will run.
+      console.log("This is characters", characters);
       setNext(characters.next);
       setPrevious(characters.previous);
       setCharacters(characters.results);
@@ -25,12 +30,12 @@ export default function StarWarsCharacters() {
 
   const goToNext = e => {
     e.preventDefault();
-    setUrl(next);
+    dispatch({ type: "PAGE", payload: next });
   };
 
   const goToPrevious = e => {
     e.preventDefault();
-    setUrl(previous);
+    dispatch({ type: "PAGE", payload: previous });
   };
 
   return (
