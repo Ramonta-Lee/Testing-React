@@ -14,7 +14,8 @@ export default function StarWarsCharacters() {
     setIsLoading(true);
     const getCharacters = async () => {
       const characters = await getData(url);
-      console.log(characters);
+      // AFTER this is RESOLVED, the rest of the code will run.
+      console.log("This is characters", characters);
       setNext(characters.next);
       setPrevious(characters.previous);
       setCharacters(characters.results);
