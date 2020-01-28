@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 export default function StarWarsCharacters() {
   const url = useSelector(state => state.url);
-  const dispatch = useDispatch;
+  const dispatch = useDispatch();
 
   const [previous, setPrevious] = useState();
   const [next, setNext] = useState();

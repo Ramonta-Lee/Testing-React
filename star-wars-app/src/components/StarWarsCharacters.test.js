@@ -1,13 +1,18 @@
 import React from "react";
-
+import { configureMockStore } from "redux-mock-store";
 import { render, fireEvent, wait } from "@testing-library/react";
-
+import { Provider } from "react-redux";
 import { getData as mockGetData } from "../api";
-
+import { configure } from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
 import App from "../App";
 import StarWarsCharacters from "./StarWarsCharacters";
 
 // Remember to write these the way the code is read
+
+configure({ adapter: new Adapter() });
+
+const mockStore = configureMockStore([]);
 
 jest.mock("../api");
 
@@ -25,7 +30,13 @@ mockGetData.mockResolvedValue({
 });
 
 test("logo renders", () => {
-  const { getByAltText } = render(<App />);
+  const store = mockStore({ url: "https://swapi.co/api/people" });
+
+  const { getByAltText } = render(
+    <Provider store={store}>
+      <App />
+    </Provider>
+  );
   getByAltText(/logo/i);
 });
 

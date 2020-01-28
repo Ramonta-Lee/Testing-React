@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import StarWarsCharacters from "./components/StarWarsCharacters";
-import  Menu  from "./components/Dropdown";
+import Menu from "./components/Dropdown";
 
 function App() {
   return (
